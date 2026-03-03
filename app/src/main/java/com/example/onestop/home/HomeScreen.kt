@@ -23,7 +23,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.onestop.DarkPreview
+import com.example.onestop.features.goalTracker.data.GoalViewModel
 import com.example.onestop.features.goalTracker.ui.DailyGoalsScreen
+import com.example.onestop.features.studytracker.StudyViewModel
 import com.example.onestop.home.quranQuote.QuranViewModel
 import com.example.onestop.navigation.Routes
 import com.example.onestop.ui.theme.*
@@ -47,7 +49,11 @@ fun OneStopApp() {
 }
 // ── Home Screen ───────────────────────────────────────────────────────────────
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(
+    navController: NavController,
+    goalViewModel: GoalViewModel = viewModel(),
+    studyViewModel: StudyViewModel = viewModel()
+) {
     val quranViewModel: QuranViewModel = viewModel()
     val ayah by quranViewModel.ayah.collectAsState()
     val error by quranViewModel.error.collectAsState()
@@ -85,14 +91,14 @@ fun HomeScreen(navController: NavController) {
             StatCard(
                 modifier = Modifier.weight(1f),
                 label = "Total Focus",
-                value = "1 hr 20 mins"
+                value = "${studyViewModel.totalTime ?: 0} min"
             )
             StatCard(
                 modifier = Modifier
                     .weight(1f)
                     .clickable { navController.navigate(Routes.DAILY_GOALS) },
                 label = "Daily Goals",
-                value = "80%"
+                value = "${goalViewModel.completed}/${goalViewModel.total}"
             )
         }
 

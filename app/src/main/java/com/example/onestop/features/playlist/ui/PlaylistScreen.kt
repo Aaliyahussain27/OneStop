@@ -225,12 +225,3 @@ fun PlaylistScreen(modifier: Modifier = Modifier) {
         }
     }
 }
-
-// ── Preview ───────────────────────────────────────────────────────────────────
-@Preview(showBackground = true, backgroundColor = 0xFF1C2130, widthDp = 360, heightDp = 760)
-@Composable
-fun PlaylistScreenPreview() {
-    DarkPreview {
-        PlaylistScreen()
-    }
-}

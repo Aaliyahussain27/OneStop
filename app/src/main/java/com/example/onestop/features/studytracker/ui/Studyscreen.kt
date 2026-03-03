@@ -46,7 +46,10 @@ fun SessionRow(session: StudySession) {
 
 // ── Main Screen ───────────────────────────────────────────────────────────────
 @Composable
-fun Studyscreen(modifier: Modifier = Modifier) {
+fun Studyscreen(
+    modifier: Modifier = Modifier,
+    viewModel: StudyViewModel = viewModel()
+) {
     val context = LocalContext.current.applicationContext
     val db = remember {
         Room.databaseBuilder(context, MyDatabase::class.java, "study-db").build()
@@ -218,14 +221,5 @@ fun Studyscreen(modifier: Modifier = Modifier) {
                 }
             }
         }
-    }
-}
-
-// ── Preview ───────────────────────────────────────────────────────────────────
-@Preview(showBackground = true, backgroundColor = 0xFF1C2130, widthDp = 360, heightDp = 760)
-@Composable
-fun StudyScreenPreview() {
-    DarkPreview {
-        Studyscreen()
     }
 }

@@ -13,25 +13,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.onestop.DarkPreview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.onestop.features.goalTracker.data.Goal
+import com.example.onestop.features.goalTracker.data.GoalViewModel
 import com.example.onestop.ui.theme.*
 
-data class Goal(
-    val id: Int,
-    val name: String,
-    val completed: Boolean = false
-)
-
 @Composable
-fun DailyGoalsScreen() {
-    var goals by remember { mutableStateOf(listOf<Goal>()) }  // empty list
-    var showDialog by remember { mutableStateOf(false) }
-    var newGoalName by remember { mutableStateOf("") }
+fun DailyGoalsScreen(viewModel: GoalViewModel = viewModel()) {
+    val goals     = viewModel.goals
+    val total     = viewModel.total
+    val completed = viewModel.completed
 
-    val total     = goals.size
-    val completed = goals.count { it.completed }
+    var showDialog   by remember { mutableStateOf(false) }
+    var newGoalName  by remember { mutableStateOf("") }
 
     if (showDialog) {
         AlertDialog(
@@ -67,8 +62,7 @@ fun DailyGoalsScreen() {
                 Button(
                     onClick = {
                         if (newGoalName.isNotBlank()) {
-                            val newId = (goals.maxOfOrNull { it.id } ?: 0) + 1
-                            goals = goals + Goal(newId, newGoalName.trim())
+                            viewModel.addGoal(newGoalName)
                             newGoalName = ""
                             showDialog = false
                         }
@@ -145,11 +139,7 @@ fun DailyGoalsScreen() {
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             items(goals, key = { it.id }) { goal ->
-                GoalItem(goal = goal, onToggle = { toggled ->
-                    goals = goals.map {
-                        if (it.id == toggled.id) it.copy(completed = !it.completed) else it
-                    }
-                })
+                GoalItem(goal = goal, onToggle = { viewModel.toggleGoal(it) })
             }
         }
 
@@ -195,13 +185,5 @@ fun GoalItem(goal: Goal, onToggle: (Goal) -> Unit) {
             style = MaterialTheme.typography.bodyLarge,
             textDecoration = if (goal.completed) TextDecoration.LineThrough else TextDecoration.None
         )
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFF1C2130, widthDp = 360, heightDp = 760)
-@Composable
-fun DailyGoalsScreenPreview() {
-    DarkPreview {
-        DailyGoalsScreen()
     }
 }
