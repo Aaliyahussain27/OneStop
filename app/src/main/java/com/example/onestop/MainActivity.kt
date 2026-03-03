@@ -11,8 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import com.example.onestop.features.goalTracker.ui.DailyGoalsScreen
 import com.example.onestop.features.playlist.ui.PlaylistScreen
 import com.example.onestop.features.studytracker.ui.Studyscreen
+import com.example.onestop.home.HomeScreen
+import com.example.onestop.home.OneStopApp
+import com.example.onestop.navigation.NavGraph
 import com.example.onestop.ui.theme.OnestopTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,8 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             OnestopTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Studyscreen( modifier = Modifier.padding(innerPadding))
-                    //PlaylistScreen()
+                    NavGraph()
                 }
             }
         }
