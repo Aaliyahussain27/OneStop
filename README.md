@@ -76,8 +76,10 @@ com.example.onestop
 ---
 
 ## 📸 Screenshots
-
-*(Add screenshots here)*
+<img width="270" alt="WhatsApp Image 2026-04-21 at 1 09 24 PM" src="https://github.com/user-attachments/assets/ac1d21dd-58a7-464b-8d34-eafad9f416f5" />
+<img width="270" alt="WhatsApp Image 2026-04-21 at 1 09 24 PM (1)" src="https://github.com/user-attachments/assets/53c6da1d-4168-42b8-8db3-1dbfa2491181" />
+<img width="270" alt="WhatsApp Image 2026-04-21 at 1 09 25 PM" src="https://github.com/user-attachments/assets/14169e97-c0c1-4ee8-a5c2-fbf8598ceaa1" />
+<img width="270" alt="WhatsApp Image 2026-04-21 at 1 09 24 PM (2)" src="https://github.com/user-attachments/assets/f9f626b6-04f8-421d-92f6-5265239dc66a" />
 
 ---
 
